@@ -70,15 +70,15 @@ public class MainActivity extends SherlockFragmentActivity {
         };
  
         // Create first Tab
-        tab = mActionBar.newTab().setText("Tab1").setTabListener(tabListener);
+        tab = mActionBar.newTab().setText("Pet Status").setTabListener(tabListener);
         mActionBar.addTab(tab);
  
         // Create second Tab
-        tab = mActionBar.newTab().setText("Tab2").setTabListener(tabListener);
+        tab = mActionBar.newTab().setText("Invoices").setTabListener(tabListener);
         mActionBar.addTab(tab);
  
         // Create third Tab
-        tab = mActionBar.newTab().setText("Tab3").setTabListener(tabListener);
+        tab = mActionBar.newTab().setText("Ask a vet").setTabListener(tabListener);
         mActionBar.addTab(tab);
  
     }
