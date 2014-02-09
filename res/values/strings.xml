@@ -8,5 +8,6 @@
     <string name="Fragment2">fragment2</string>
     <string name="Fragment3">fragment3</string>
     <string name="title_activity_main">Vetonline</string>
+    <string name="title_activity_pet_detail">My pet</string>
 
 </resources>

@@ -3,10 +3,14 @@ package com.vetonline.fragments;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -15,6 +19,7 @@ import android.widget.SimpleAdapter;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.google.common.collect.Lists;
 import com.vetonline.PetArrayAdapter;
+import com.vetonline.PetDetailActivity;
 import com.vetonline.R;
 import com.vetonline.R.id;
 import com.vetonline.R.layout;
@@ -37,6 +42,18 @@ public class PetStatusFragment extends SherlockFragment {
         View view = inflater.inflate(R.layout.fragment_tab_petstatus, container, false);
         ListView listView = (ListView) view.findViewById(R.id.pet_list_view);
         listView.setAdapter(createListAdapter());
+        
+        listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> listView, View parentLayout, int index,
+					long rowId) {
+				// START HERE!!! Need to go to another activity to show details of 
+				// pet status. Also show latest status in pet list view for each pet.
+				Intent intent = new Intent(getActivity(), PetDetailActivity.class);
+				startActivity(intent);
+			}
+		});
         
         return view;
     }
