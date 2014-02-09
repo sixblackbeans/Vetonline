@@ -3,6 +3,7 @@ package com.vetonline;
 import java.util.List;
 
 import com.vetonline.data.Pet;
+import com.vetonline.data.PetStatus;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -29,15 +30,25 @@ public class PetArrayAdapter extends ArrayAdapter<Pet> {
 		View rowView = inflater.inflate(R.layout.list_pet_item, parent, false);
 		
 		// Get the individual views within the layout
-		TextView textView = (TextView) rowView.findViewById(R.id.pet_name);
 		ImageView imageView = (ImageView) rowView.findViewById(R.id.pet_image);
+		TextView petNameTextView = (TextView) rowView.findViewById(R.id.pet_name);
+		TextView currentStatusTextView = (TextView) rowView.findViewById(R.id.pet_current_status);
 		
 		// Set the data in the view from pet instance.
 		Pet pet = getItem(position);
-		textView.setText(pet.getName());
 		imageView.setImageResource(pet.getSpecies() == Pet.Species.CAT ? R.drawable.cat : R.drawable.dog);
+		petNameTextView.setText(pet.getName());
+		currentStatusTextView.setText(getCurrentStatus(pet));
 		
 		return rowView;
+	}
+
+	private CharSequence getCurrentStatus(Pet pet) {
+		PetStatus latestStatus = pet.getLatestStatus();
+		if (latestStatus != null) {
+			return latestStatus.getText();
+		}
+		return "";
 	}
 
 }
