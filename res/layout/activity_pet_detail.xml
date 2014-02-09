@@ -45,20 +45,6 @@
         </TextView>
     </LinearLayout>
 
-    <!--
-         <TextView
-        android:id="@+id/text_pet_detail_textarea"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignLeft="@+id/image_pet_detail"
-        android:layout_below="@+id/image_pet_detail"
-        android:layout_marginTop="23dp"
-        android:ems="10"
-        android:scrollbars="vertical"
-        android:inputType="textMultiLine" 
-        android:/>
-    -->
-
 	<TextView
 	    android:id="@+id/textViewStatusHistoryLabel"
 	    android:layout_alignParentLeft="true"
@@ -68,17 +54,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="History:"/>
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+	<ScrollView
+        android:id="@+id/scroll_textview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textViewStatusHistoryLabel"
         android:layout_marginTop="5dp"
-        android:text="Medium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\n"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:scrollbars="vertical">
+	    <TextView
+	        android:id="@+id/textView1"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="5dp"
+	        android:text="Medium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\nMedium Text\nasdf\nEsdfds\n"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+    </ScrollView>
     
 
 </RelativeLayout>
