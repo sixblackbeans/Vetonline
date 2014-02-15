@@ -1,9 +1,11 @@
 package com.vetonline.data;
 
 import java.io.Serializable;
+import java.security.acl.Owner;
 import java.util.List;
 
 import com.google.common.collect.Lists;
+import com.vetonline.data.data.PetOwner;
 
 public class Pet implements Serializable {
 
@@ -12,6 +14,7 @@ public class Pet implements Serializable {
 	}
 	private String name;
 	private Species species;
+	private String email;
 	private List<PetStatus> petStatus = Lists.newArrayList();
 	
 	public Pet() {
@@ -20,8 +23,9 @@ public class Pet implements Serializable {
 		this.name = name;
 		this.species = species;
 	}
-	public Pet(String name, Species species, List<PetStatus> statuses) {
+	public Pet(String email, String name, Species species, List<PetStatus> statuses) {
 		this(name, species);
+		this.setEmail(email);
 		this.petStatus = statuses;
 	}
 	public String getName() {
@@ -51,5 +55,10 @@ public class Pet implements Serializable {
 		}
 		return petStatus.get(petStatus.size() - 1);
 	}
-	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }

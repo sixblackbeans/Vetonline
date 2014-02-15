@@ -32,6 +32,9 @@ import android.os.Build;
 
 public class PetDetailActivity extends SherlockActivity {
 
+	/** Key in intent whose value is the Pet object that was clicked. */
+	public final static String CLICKED_PET = "com.vetonline.CLICKED_PET";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,7 +46,7 @@ public class PetDetailActivity extends SherlockActivity {
 
 	private void setupContent() {
 		Intent intent = getIntent();
-		Pet pet = (Pet) intent.getSerializableExtra(PetStatusFragment.CLICKED_PET);
+		Pet pet = (Pet) intent.getSerializableExtra(CLICKED_PET);
 		TextView textViewPetName = (TextView) findViewById(R.id.text_pet_detail_name);
 		TextView textViewCurrentStatus = (TextView) findViewById(R.id.text_pet_detail_status);
 		TextView textViewStatusHistory = (TextView) findViewById(R.id.text_pet_status_history);

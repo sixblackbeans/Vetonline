@@ -24,6 +24,7 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseFacebookUtils.Permissions;
 import com.parse.ParseUser;
 import com.vetonline.R;
+import com.vetonline.adapter.ViewPagerAdapter;
  
 public class MainActivity extends SherlockFragmentActivity {
  
@@ -68,6 +69,7 @@ public class MainActivity extends SherlockFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	Log.d("app", "onCreate() called");
+    	
         super.onCreate(savedInstanceState);
         // Get the view from activity_main.xml
         setContentView(R.layout.activity_main);
@@ -77,9 +79,6 @@ public class MainActivity extends SherlockFragmentActivity {
  
         // Locate ViewPager in activity_main.xml
         mPager = (ViewPager) findViewById(R.id.pager);
- 
-        // Activate Fragment Manager
-        FragmentManager fm = getSupportFragmentManager();
  
         // Capture ViewPager page swipes
         ViewPager.SimpleOnPageChangeListener ViewPagerListener = new ViewPager.SimpleOnPageChangeListener() {
@@ -93,7 +92,7 @@ public class MainActivity extends SherlockFragmentActivity {
  
         mPager.setOnPageChangeListener(ViewPagerListener);
         // Locate the adapter class called ViewPagerAdapter.java
-        ViewPagerAdapter viewpageradapter = new ViewPagerAdapter(fm);
+        ViewPagerAdapter viewpageradapter = new ViewPagerAdapter(getSupportFragmentManager());
         // Set the View Pager Adapter into ViewPager
         mPager.setAdapter(viewpageradapter);
  
@@ -152,7 +151,7 @@ public class MainActivity extends SherlockFragmentActivity {
     
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
-    	Log.d("df", "manu item clicked! " + featureId + " menuitem: " + item);
+    	Log.d("app", "manu item clicked! " + featureId + " menuitem: " + item);
     	if (MENU_ITEM_LOGIN.equals(item.getTitle())) {
     		loginFacebook();
     	} else if (MENU_ITEM_LOGOUT.equals(item.getTitle())) {
@@ -190,7 +189,8 @@ public class MainActivity extends SherlockFragmentActivity {
 	}
 	
 	private static void saveFacebookInfoInBackground() {
-		Request.executeMeRequestAsync(ParseFacebookUtils.getSession(), new Request.GraphUserCallback() {
+//		Request.executeMeRequestAsync(ParseFacebookUtils.getSession(), new Request.GraphUserCallback() {
+		Request.newMeRequest(ParseFacebookUtils.getSession(), new Request.GraphUserCallback() {
 			@Override
 			public void onCompleted(GraphUser user, Response response) {
 			      if (user != null) {

@@ -15,25 +15,47 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.google.common.collect.Lists;
-import com.vetonline.PetArrayAdapter;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.vetonline.PetDetailActivity;
 import com.vetonline.R;
+import com.vetonline.adapter.PetArrayAdapter;
 import com.vetonline.data.Pet;
 import com.vetonline.data.PetStatus;
+import com.vetonline.repo.PetsRepository;
  
 public class PetStatusFragment extends SherlockFragment {
 	
-	/** Key in intent whose value is the Pet object that was clicked. */
-	public final static String CLICKED_PET = "com.vetonline.CLICKED_PET";
-	
 	private List<Pet> pets;
+	private PetsRepository repo = new PetsRepository();
  
+	private void getPetsOfUser() {
+		ParseUser currentUser = ParseUser.getCurrentUser();
+		ParseQuery<ParseObject> q = ParseQuery.getQuery("pets");
+		q.whereEqualTo("owner", currentUser);
+		q.findInBackground(new FindCallback<ParseObject>() {
+		     public void done(List<ParseObject> objects, ParseException e) {
+		         if (e == null) {
+		        	 // successs
+		         } else {
+		             //fail
+		         }
+		     }
+		 });
+	}
+	
+	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-    	pets = createHardCodedPetsList();
     	
-        View view = inflater.inflate(R.layout.fragment_tab_petstatus, container, false);
+//    	pets = createHardCodedPetsList();
+    	pets = repo.getPetsOfUser(ParseUser.getCurrentUser());
+    	
+    	View view = inflater.inflate(R.layout.fragment_tab_petstatus, container, false);
         ListView listView = (ListView) view.findViewById(R.id.pet_list_view);
         listView.setAdapter(createListAdapter());
         
@@ -45,7 +67,7 @@ public class PetStatusFragment extends SherlockFragment {
 				// START HERE!!! Need to go to another activity to show details of 
 				// pet status. Also show latest status in pet list view for each pet.
 				Intent intent = new Intent(getActivity(), PetDetailActivity.class);
-				intent.putExtra(CLICKED_PET, pets.get(index));
+				intent.putExtra(PetDetailActivity.CLICKED_PET, pets.get(index));
 				startActivity(intent);
 			}
 		});
@@ -57,12 +79,12 @@ public class PetStatusFragment extends SherlockFragment {
 		List<PetStatus> petStatusList = createPetStatusList();
     	
     	List<Pet> pets = Lists.newArrayList(
-			new Pet("dori", Pet.Species.CAT, petStatusList),
-			new Pet("dsefes", Pet.Species.CAT, petStatusList),
-			new Pet("dwesi", Pet.Species.DOG, petStatusList),
-			new Pet("desri", Pet.Species.DOG, petStatusList),
-			new Pet("asi", Pet.Species.CAT, petStatusList),
-			new Pet("maggie", Pet.Species.DOG, petStatusList));
+			new Pet("asdf", "dori", Pet.Species.CAT, petStatusList),
+			new Pet("asdf", "dsefes", Pet.Species.CAT, petStatusList),
+			new Pet("asdf", "dwesi", Pet.Species.DOG, petStatusList),
+			new Pet("asdf", "desri", Pet.Species.DOG, petStatusList),
+			new Pet("asdf", "asi", Pet.Species.CAT, petStatusList),
+			new Pet("asdf", "maggie", Pet.Species.DOG, petStatusList));
 		
 		return pets;
 	}
