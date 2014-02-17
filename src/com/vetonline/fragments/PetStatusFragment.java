@@ -1,15 +1,19 @@
 package com.vetonline.fragments;
  
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -29,9 +33,10 @@ import com.vetonline.repo.PetsRepository;
  
 public class PetStatusFragment extends SherlockFragment {
 	
-	private List<Pet> pets;
 	private PetsRepository repo = new PetsRepository();
- 
+	private final static String PETS_LIST_SAVED_STATE = "petsListSavedState";
+	private ListView listView;
+	
 	private void getPetsOfUser() {
 		ParseUser currentUser = ParseUser.getCurrentUser();
 		ParseQuery<ParseObject> q = ParseQuery.getQuery("pets");
@@ -48,17 +53,20 @@ public class PetStatusFragment extends SherlockFragment {
 	}
 	
 	
+	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
     	
-//    	pets = createHardCodedPetsList();
-    	pets = repo.getPetsOfUser(ParseUser.getCurrentUser());
+    	final ArrayAdapter<Pet> petListAdapter = createListAdapter();
+    	
+    	if (savedInstanceState == null) {
+    		fetchPets(petListAdapter);
+    	}
     	
     	View view = inflater.inflate(R.layout.fragment_tab_petstatus, container, false);
-        ListView listView = (ListView) view.findViewById(R.id.pet_list_view);
-        listView.setAdapter(createListAdapter());
-        
+        listView = (ListView) view.findViewById(R.id.pet_list_view);
+        listView.setAdapter(petListAdapter);
         listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -67,7 +75,7 @@ public class PetStatusFragment extends SherlockFragment {
 				// START HERE!!! Need to go to another activity to show details of 
 				// pet status. Also show latest status in pet list view for each pet.
 				Intent intent = new Intent(getActivity(), PetDetailActivity.class);
-				intent.putExtra(PetDetailActivity.CLICKED_PET, pets.get(index));
+				intent.putExtra(PetDetailActivity.CLICKED_PET, petListAdapter.getItem(index));
 				startActivity(intent);
 			}
 		});
@@ -75,7 +83,23 @@ public class PetStatusFragment extends SherlockFragment {
         return view;
     }
  
-    private List<Pet> createHardCodedPetsList() {
+    private void fetchPets(final ArrayAdapter<Pet> petListAdapter) {
+    	repo.getPetsOfUser(ParseUser.getCurrentUser(), new FindCallback<ParseObject>() {
+
+			@Override
+			public void done(List<ParseObject> parseObjects, ParseException ex) {
+				List<Pet> petsList = repo.toPets(parseObjects);
+				for (Pet pet : petsList) {
+					petListAdapter.add(pet);
+				}
+			}
+    		
+    	});
+	}
+
+
+
+	private List<Pet> createHardCodedPetsList() {
 		List<PetStatus> petStatusList = createPetStatusList();
     	
     	List<Pet> pets = Lists.newArrayList(
@@ -98,9 +122,9 @@ public class PetStatusFragment extends SherlockFragment {
 		return statusList;
 	}
 
-	private ListAdapter createListAdapter() {
+	private ArrayAdapter createListAdapter() {
     	
-    	return new PetArrayAdapter(getActivity(), R.layout.list_pet_item, R.id.pet_name, pets);
+    	return new PetArrayAdapter(getActivity(), R.layout.list_pet_item, R.id.pet_name);
     	
 //    	return new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, 
 //    			Lists.newArrayList("one", "two"));
@@ -110,6 +134,16 @@ public class PetStatusFragment extends SherlockFragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         setUserVisibleHint(true);
+        savePetListInBundle(outState);
     }
+
+	private void savePetListInBundle(Bundle outState) {
+		ListAdapter adapter = listView.getAdapter();
+		List<Pet> pets = Lists.newArrayList();
+		for (int i = 0; i < adapter.getCount(); i++) {
+			pets.add((Pet)adapter.getItem(i));
+		}
+		outState.putSerializable(PETS_LIST_SAVED_STATE, (Serializable) pets);
+	}
  
 }
