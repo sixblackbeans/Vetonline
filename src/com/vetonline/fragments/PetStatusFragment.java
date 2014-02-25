@@ -40,7 +40,7 @@ public class PetStatusFragment extends SherlockFragment {
 	private void getPetsOfUser() {
 		ParseUser currentUser = ParseUser.getCurrentUser();
 		ParseQuery<ParseObject> q = ParseQuery.getQuery("pets");
-		q.whereEqualTo("owner", currentUser);
+//		q.whereEqualTo("owner", currentUser);
 		q.findInBackground(new FindCallback<ParseObject>() {
 		     public void done(List<ParseObject> objects, ParseException e) {
 		         if (e == null) {

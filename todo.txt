@@ -1,0 +1,4 @@
+* When click login, login dialog display showing facebook login vs normal login
+* Make data model- Pet contains a logged in user.
+* Get doggie list from query- return all pets whose owners are the logged in user.
+* add pets 
