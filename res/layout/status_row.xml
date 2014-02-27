@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_margin="8dp">
+
+    <!-- Need this relative layout within linear layout otherwise I can't
+    make the space between speech bubble! -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8sp"
+        android:background="@drawable/chat_patch" >
+
+        <TextView
+            android:id="@+id/status_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ready for Surgery"
+            android:textColor="@color/Black"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/status_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/status_date"
+            android:shadowColor="@color/textShadow"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:text="Medium Text"
+            android:textColor="@color/textColor"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/status_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/status_date"
+            android:layout_alignBottom="@+id/status_date"
+            android:layout_alignRight="@+id/status_text"
+            android:gravity="right"
+            android:text="2:30 PM Sat 3, 2012"
+            android:textColor="@color/Black"
+            android:textSize="10sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>
