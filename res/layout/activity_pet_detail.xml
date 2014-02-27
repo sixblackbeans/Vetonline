@@ -54,7 +54,36 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="History:"/>
-	<ScrollView
+	
+    <ListView
+        android:id="@+id/pet_status_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/textViewStatusHistoryLabel"
+        android:cacheColorHint="#00000000"
+        android:divider="#00000000"
+        android:listSelector="#00000000" >
+
+    </ListView>	
+    
+<!--     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textViewStatusHistoryLabel"
+        android:layout_marginLeft="5dp"
+        android:orientation="vertical" >
+	   <TextView
+	        android:id="@+id/message_text"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="5sp"
+	        android:background="@drawable/speech_bubble_green"
+	        android:text="Medium Text"
+	        android:textSize="20sp" /> -->
+
+	
+	
+<!-- 	<ScrollView
         android:id="@+id/scroll_textview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -74,7 +103,7 @@
 	        android:textAppearance="?android:attr/textAppearanceMedium"
 	        android:textSize="12sp" />
 
-    </ScrollView>
+    </ScrollView> -->
     
 
 </RelativeLayout>

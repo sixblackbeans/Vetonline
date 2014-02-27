@@ -119,11 +119,11 @@ public class MainActivity extends SherlockFragmentActivity {
         mActionBar.addTab(tab);
  
         // Create second Tab
-        tab = mActionBar.newTab().setText("Invoices").setTabListener(tabListener);
+        tab = mActionBar.newTab().setText("Ask a vet").setTabListener(tabListener);
         mActionBar.addTab(tab);
  
         // Create third Tab
-        tab = mActionBar.newTab().setText("Ask a vet").setTabListener(tabListener);
+        tab = mActionBar.newTab().setText("Invoices").setTabListener(tabListener);
         mActionBar.addTab(tab);
  
     }

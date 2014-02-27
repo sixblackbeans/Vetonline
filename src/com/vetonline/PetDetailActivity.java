@@ -10,6 +10,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
+import com.vetonline.adapter.PetStatusBubbleAdapter;
 import com.vetonline.data.Pet;
 import com.vetonline.data.PetStatus;
 import com.vetonline.fragments.PetStatusFragment;
@@ -20,6 +21,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 import android.text.Html;
@@ -49,12 +51,15 @@ public class PetDetailActivity extends SherlockActivity {
 		Pet pet = (Pet) intent.getSerializableExtra(CLICKED_PET);
 		TextView textViewPetName = (TextView) findViewById(R.id.text_pet_detail_name);
 		TextView textViewCurrentStatus = (TextView) findViewById(R.id.text_pet_detail_status);
-		TextView textViewStatusHistory = (TextView) findViewById(R.id.text_pet_status_history);
+//		TextView textViewStatusHistory = (TextView) findViewById(R.id.text_pet_status_history);
 		
 		textViewPetName.setText(pet.getName());
 		createCurrentStatusText(pet);
 		textViewCurrentStatus.setText(createCurrentStatusText(pet));
-		textViewStatusHistory.setText(createStatusHistoryText(pet.getPetStatus()));
+		
+		ListView statusListView = (ListView) findViewById(R.id.pet_status_list);
+		statusListView.setAdapter(new PetStatusBubbleAdapter(this, pet.getPetStatus()));
+//		textViewStatusHistory.setText(createStatusHistoryText(pet.getPetStatus()));
 	}
 
 	private Spanned createCurrentStatusText(Pet pet) {

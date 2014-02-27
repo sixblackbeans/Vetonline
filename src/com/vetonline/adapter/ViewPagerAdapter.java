@@ -2,7 +2,7 @@ package com.vetonline.adapter;
  
 import com.vetonline.fragments.PetStatusFragment;
 import com.vetonline.fragments.FragmentTab2;
-import com.vetonline.fragments.FragmentTab3;
+import com.vetonline.fragments.AskVetFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -33,7 +33,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
  
         // Open FragmentTab3.java
         case 2:
-            FragmentTab3 fragmenttab3 = new FragmentTab3();
+            AskVetFragment fragmenttab3 = new AskVetFragment();
             return fragmenttab3;
         }
         return null;
