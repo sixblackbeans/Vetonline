@@ -28,13 +28,13 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
  
         // Open FragmentTab2.java
         case 1:
-            FragmentTab2 fragmenttab2 = new FragmentTab2();
-            return fragmenttab2;
+        	AskVetFragment askVetFrag = new AskVetFragment();
+        	return askVetFrag;
  
         // Open FragmentTab3.java
         case 2:
-            AskVetFragment fragmenttab3 = new AskVetFragment();
-            return fragmenttab3;
+        	FragmentTab2 fragmenttab2 = new FragmentTab2();
+        	return fragmenttab2;
         }
         return null;
     }
