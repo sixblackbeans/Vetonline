@@ -1,4 +1,2 @@
-* When click login, login dialog display showing facebook login vs normal login
-* Make data model- Pet contains a logged in user.
-* Get doggie list from query- return all pets whose owners are the logged in user.
-* add pets 
+* When click next button in ask vet page, go to select vet list page.
+* of course you gotta create the select vet list page!

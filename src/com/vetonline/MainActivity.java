@@ -126,12 +126,13 @@ public class MainActivity extends SherlockFragmentActivity {
         tab = mActionBar.newTab().setText("Invoices").setTabListener(tabListener);
         mActionBar.addTab(tab);
  
+       
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
       super.onActivityResult(requestCode, resultCode, data);
-      ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
+//      ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
     }
     
     @Override

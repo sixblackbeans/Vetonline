@@ -31,10 +31,10 @@
     </EditText>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/next_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageButton1"
+        android:layout_alignLeft="@+id/button_take_pic"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="18dp"
@@ -45,24 +45,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/textView1"
-        android:layout_alignTop="@+id/imageButton1"
+        android:layout_alignTop="@+id/button_take_pic"
         android:src="@android:drawable/ic_menu_gallery" />
 
     <ImageButton
-        android:id="@+id/imageButton1"
+        android:id="@+id/button_take_pic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
+        android:layout_above="@+id/next_button"
         android:layout_marginBottom="66dp"
         android:layout_toLeftOf="@+id/button_select_gallery"
         android:src="@android:drawable/ic_menu_camera" />
-
-    <ImageButton
-        android:id="@+id/ImageButton02"
-        android:layout_width="wrap_content"
+    
+    <com.vetonline.view.CenteringHorizontalScrollView
+        android:id="@+id/HSVImage"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button_select_gallery"
-        android:layout_centerHorizontal="true"
-        android:src="@android:drawable/ic_menu_camera" />
+        android:layout_above="@+id/next_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/button_select_gallery" >
+
+                <LinearLayout
+                    android:id="@+id/linearImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" >
+                </LinearLayout>
+            </com.vetonline.view.CenteringHorizontalScrollView>
  
 </RelativeLayout>
