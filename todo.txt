@@ -1,2 +1,3 @@
 * When click next button in ask vet page, go to select vet list page.
 * of course you gotta create the select vet list page!
+* Fix the list of selected/taken photos of pet

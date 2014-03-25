@@ -2,6 +2,8 @@ package com.vetonline.fragments;
 
 import java.io.InputStream;
 
+
+
 import android.app.Activity;
 import android.app.Instrumentation.ActivityResult;
 import android.content.Intent;
@@ -20,7 +22,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.LinearLayout.LayoutParams;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.vetonline.R;
@@ -29,7 +31,7 @@ public class AskVetFragment extends SherlockFragment {
 	
     protected static final int SELECT_PHOTO = 0;
 	protected static final int REQUEST_IMAGE_CAPTURE = 1;
-    private LinearLayout imageGallery;
+	private LinearLayout imagesLinearLayout;
 
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,23 +40,23 @@ public class AskVetFragment extends SherlockFragment {
 		
         // Get the view from fragmenttab3.xml
         View view = inflater.inflate(R.layout.fragment_tab_askvet, container, false);
+     
+        
+        View findViewById = view.findViewById(R.id.selectedImages);
+        
+        imagesLinearLayout = (LinearLayout) findViewById;
         
         configureImageGalleryButton(view);
         configureTakePictureButton(view);
         configureNextButton(view);
         
-        // TODO: test this stuff with real phone!!
-        imageGallery=(LinearLayout)view.findViewById(R.id.linearImage);
-        addImagesToGallery(8);
-        
-        
-        
+        addImagesToGallery(4);
         
         return view;
     }
 
 	private void configureNextButton(View view) {
-		Button nextButton = (Button) view.findViewById(R.id.next_button);
+		Button button = (Button) view.findViewById(R.id.next_button);
 		
 	}
 
@@ -94,14 +96,28 @@ public class AskVetFragment extends SherlockFragment {
 		for (int i = 0; i < count; i++) {
 			ImageView image=new ImageView(getActivity());
 			image.setBackgroundResource(R.drawable.dog);
-			imageGallery.addView(image);
+			LayoutParams lpView = new LayoutParams(130,130);
+			imagesLinearLayout.addView(image, lpView);
 		}
 	}
 	
-	private void addImageToGallery(Bitmap bitmap) {
+	private void addBitmapToGallery(Bitmap bitmap) {
 		ImageView image=new ImageView(getActivity());
 		image.setImageBitmap(bitmap);
-		imageGallery.addView(image);
+//		addImageView(image);
+//		imageGallery.addView(image);
+		LayoutParams lpView = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		imagesLinearLayout.addView(image, lpView);
+//		LinearLayout.LayoutParams imParams = 
+//				new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+//				ImageView imSex = new ImageView(context);
+//				imSex.setImageResource(getmyImage());
+//
+//				mainlayout.addView(imSex,imParams); 
+	}
+
+	private void addImageView(ImageView image) {
+		Button button = (Button) getActivity().findViewById(R.id.next_button);
 	}
 
 	@Override
@@ -125,13 +141,13 @@ public class AskVetFragment extends SherlockFragment {
 	            String filePath = cursor.getString(columnIndex);
 	            cursor.close();
 	            Bitmap yourSelectedImage = BitmapFactory.decodeFile(filePath);
-	            addImageToGallery(yourSelectedImage);
+	            addBitmapToGallery(yourSelectedImage);
 //	            Toast.makeText(getActivity(), "got image", Toast.LENGTH_SHORT).show();
 		        break;
 	    	case REQUEST_IMAGE_CAPTURE:
 	            Bundle extras = imageReturnedIntent.getExtras();
 	            Bitmap imageBitmap = (Bitmap) extras.get("data");
-	            addImageToGallery(imageBitmap);
+	            addBitmapToGallery(imageBitmap);
 	            break;
 	    }
 	}

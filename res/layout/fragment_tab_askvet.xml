@@ -1,5 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -18,7 +22,7 @@
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button_select_gallery"
+        android:layout_above="@+id/button_take_pic"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView1"
@@ -30,34 +34,8 @@
 
     </EditText>
 
-    <Button
-        android:id="@+id/next_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button_take_pic"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="18dp"
-        android:text="Next ->" />
-
-    <ImageButton
-        android:id="@+id/button_select_gallery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_alignTop="@+id/button_take_pic"
-        android:src="@android:drawable/ic_menu_gallery" />
-
-    <ImageButton
-        android:id="@+id/button_take_pic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/next_button"
-        android:layout_marginBottom="66dp"
-        android:layout_toLeftOf="@+id/button_select_gallery"
-        android:src="@android:drawable/ic_menu_camera" />
-    
-    <com.vetonline.view.CenteringHorizontalScrollView
+    <!--
+         <com.vetonline.view.CenteringHorizontalScrollView
         android:id="@+id/HSVImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -73,5 +51,42 @@
                     android:orientation="horizontal" >
                 </LinearLayout>
             </com.vetonline.view.CenteringHorizontalScrollView>
- 
+    -->
+
+    <ImageButton
+        android:id="@+id/button_select_gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="151dp"
+        android:src="@android:drawable/ic_menu_gallery" />
+
+    <ImageButton
+        android:id="@+id/button_take_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/button_select_gallery"
+        android:layout_toRightOf="@+id/button_select_gallery"
+        android:src="@android:drawable/ic_menu_camera" />
+
+    <LinearLayout
+        android:id="@+id/selectedImages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button_select_gallery"
+        android:orientation="vertical" >
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/selectedImages"
+        
+        android:text="Next ->" />
+
 </RelativeLayout>
+</ScrollView>
